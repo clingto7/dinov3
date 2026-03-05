@@ -1,3 +1,49 @@
+[project]
+name = "dinov3"
+version = "0.0.1"
+description = "DINOv3: Self-supervised vision foundation model"
+requires-python = ">=3.11"
+dependencies = [
+    # Core DINOv3 dependencies (from requirements.txt)
+    "ftfy",
+    "omegaconf",
+    "regex",
+    "scikit-learn",
+    "submitit",
+    "termcolor",
+    "torch>=2.7",
+    "torchmetrics",
+    "torchvision",
+    # Additional for feature extraction scripts
+    "opencv-python-headless",
+    "requests",
+    "Pillow",
+]
+
+[project.optional-dependencies]
+dev = [
+    "docstr-coverage==2.3.2",
+    "mypy[reports]==1.17",
+    "pylint==3.3.8",
+    "ruff==0.12.8",
+]
+hub = [
+    "transformers>=4.56",
+]
+
+[tool.uv]
+index-strategy = "unsafe-best-match"
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu128" }
+torchvision = { index = "pytorch-cu128" }
+torchmetrics = { index = "pytorch-cu128" }
+
 [tool.mypy]
 python_version = "3.11"
 ignore_missing_imports = true
